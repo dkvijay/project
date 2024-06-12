@@ -1,10 +1,9 @@
 pipeline {
     agent any
     stages{
-        stage('build project'){
+        stage('git cloned'){
             steps{
                 git url:'https://github.com/dkvijay/project/', branch: "master"
-                sh 'mvn clean package'
               
             }
         }
