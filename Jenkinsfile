@@ -17,8 +17,10 @@
         }
           stage('Docker login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'Github@9636', usernameVariable: 'dkvijay')]) {
-                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                // withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'Github@9636', usernameVariable: 'dkvijay')])// 
+                withCredentials([string(credentialsId: 'docker', variable: 'dockpass')]) {   
+                    // sh "echo $PASS | docker login -u $USER --password-stdin" /
+                    sh 'docker login -u dkvijay -p ${dockpass}'
                     sh 'docker push dkvijay/staragileprojectfinance:v1'
                 }
             }
